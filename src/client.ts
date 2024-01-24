@@ -28,7 +28,7 @@ export const setupClient = async () => {
           }
       });
     }
-    const langiumWorkerUrl = new URL('./server.js', '127.0.0.1:5500/clients/monaco/').href;
+    const langiumWorkerUrl = new URL('./server.js', window.location.href).href;
       const worker = new Worker(langiumWorkerUrl, {
           type: 'module',
           name: 'Custom LS'
