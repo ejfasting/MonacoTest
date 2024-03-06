@@ -6,13 +6,10 @@ import { ExtensionHostKind, registerExtension } from 'vscode/extensions';
 import '@codingame/monaco-vscode-theme-defaults-default-extension';
 import { Uri } from 'vscode';
 import { createConfiguredEditor } from 'vscode/monaco';
-import 'vscode/localExtensionHost';
 
 const languageId = "jsfso"
 
 export const configureClient = async () => {
-    await initServices()
-
     // Set values in the editor
     const exampleStatemachineUrl = new URL('./src/content.example', window.location.href).href;
     const editorText = await (await fetch(exampleStatemachineUrl)).text();
