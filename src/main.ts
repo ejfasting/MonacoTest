@@ -4,12 +4,43 @@ import { CloseAction, ErrorAction, MessageTransports } from 'vscode-languageclie
 import { MonacoLanguageClient, initServices } from 'monaco-languageclient';
 import { ExtensionHostKind, registerExtension } from 'vscode/extensions';
 import '@codingame/monaco-vscode-theme-defaults-default-extension';
+import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override';
+import getTextmateServiceOverride from '@codingame/monaco-vscode-textmate-service-override';
+import getConfigurationServiceOverride, { updateUserConfiguration } from '@codingame/monaco-vscode-configuration-service-override';
+import getKeybindingsServiceOverride from '@codingame/monaco-vscode-keybindings-service-override';
+
 import { Uri } from 'vscode';
 import { createConfiguredEditor } from 'vscode/monaco';
+import { whenReady } from '@codingame/monaco-vscode-theme-defaults-default-extension';
 
 const languageId = "jsfso"
 
 export const configureClient = async () => {
+    await initServices({
+        userServices: {
+            ...getThemeServiceOverride(),
+            ...getTextmateServiceOverride(),
+            ...getConfigurationServiceOverride(),
+            ...getKeybindingsServiceOverride()
+        },
+        debugLogging: true,
+        workspaceConfig: {
+            workspaceProvider: {
+                trusted: true,
+                workspace: {
+                    workspaceUri: Uri.file('/workspace')
+                },
+                async open() {
+                    return false;
+                }
+            }
+        }
+    });
+
+    console.log('Before ready themes');
+    await whenReady();
+    console.log('After ready themes');
+
     // Set values in the editor
     const exampleStatemachineUrl = new URL('./src/content.example', window.location.href).href;
     const editorText = await (await fetch(exampleStatemachineUrl)).text();
@@ -39,7 +70,10 @@ export const configureClient = async () => {
             }]
         }
     };
+
     registerExtension(extension, ExtensionHostKind.LocalProcess);
+    // init vscode-api
+
 
     function createLanguageClient(transports: MessageTransports): MonacoLanguageClient {
         return new MonacoLanguageClient({
