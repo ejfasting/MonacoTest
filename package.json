@@ -1,16 +1,30 @@
 {
-  "name": "monaco",
-  "version": "1.0.0",
-  "description": "extension for monaco editor",
-  "main": "index.js",
+  "name": "monaco-client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
-  "author": "",
-  "license": "ISC",
+  "devDependencies": {
+    "@types/vscode": "^1.87.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4"
+  },
   "dependencies": {
-    "monaco-editor": "^0.45.0",
-    "monaco-languageclient": "^7.3.0",
-    "vscode-languageclient": "^9.0.1"
+    "@codingame/monaco-vscode-theme-defaults-default-extension": "~2.0.0",
+    "monaco-editor": "npm:@codingame/monaco-vscode-editor-api@>=2.0.0 <2.1.0",
+    "monaco-languageclient": "~8.0.0-next.0",
+    "vscode": "npm:@codingame/monaco-vscode-api@>=2.0.0 <2.1.0",
+    "vscode-uri": "~3.0.8",
+    "monaco-editor-workers": "~0.45.0"
+  },
+  "overrides": {
+    "monaco-editor": "npm:@codingame/monaco-vscode-editor-api@>=2.0.0 <2.1.0"
+  },
+  "resolutions": {
+    "monaco-editor": "npm:@codingame/monaco-vscode-editor-api@>=2.0.0 <2.1.0"
   }
 }
