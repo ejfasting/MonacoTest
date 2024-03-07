@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --base=./",
     "preview": "vite preview"
   },
   "devDependencies": {
@@ -14,15 +14,14 @@
     "vite": "^5.1.4"
   },
   "dependencies": {
-    "@codingame/monaco-vscode-rollup-vsix-plugin": "~2.0.0",
-    "@codingame/monaco-vscode-configuration-service-override": "~2.0.0",
-    "@codingame/monaco-vscode-theme-service-override": "~2.0.0",
-    "@codingame/monaco-vscode-textmate-service-override": "~2.0.0",
-    "@codingame/monaco-vscode-keybindings-service-override": "~2.0.0",
+    "@codingame/monaco-vscode-rollup-vsix-plugin": "^3.0.0",
+    "@codingame/monaco-vscode-theme-service-override": "^3.0.0",
+    "@codingame/monaco-vscode-textmate-service-override": "^3.0.0",
+    "@codingame/monaco-vscode-configuration-service-override": "^3.0.0",
+    "@codingame/monaco-vscode-keybindings-service-override": "^3.0.0",
     "@rollup/pluginutils": "^5.1.0",
-    "monaco-editor": "npm:@codingame/monaco-vscode-editor-api@>=2.0.0 <2.1.0",
-    "monaco-languageclient": "~8.0.0-next.0",
-    "vscode": "npm:@codingame/monaco-vscode-api@>=2.0.0 <2.1.0",
-    "vscode-uri": "~3.0.8"
+    "monaco-editor": "npm:@codingame/monaco-vscode-editor-api@^3.0.0",
+    "vscode": "npm:@codingame/monaco-vscode-api@^3.0.0",
+    "monaco-languageclient": "~8.0.0-next.0"
   }
 }
