@@ -1,19 +1,18 @@
+import './jsfso-client-0.0.1.vsix'
+
 import { editor } from 'monaco-editor';
 import { createConfiguredEditor } from 'vscode/monaco';
-import { INotificationService, initialize } from 'vscode/services'
+import { initialize } from 'vscode/services'
 import { useOpenEditorStub, MonacoLanguageClient } from 'monaco-languageclient';
 import getEditorServiceOverride from '@codingame/monaco-vscode-editor-service-override';
 import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override';
 import getTextmateServiceOverride from '@codingame/monaco-vscode-textmate-service-override';
 import getConfigurationServiceOverride, { updateUserConfiguration } from '@codingame/monaco-vscode-configuration-service-override';
 import getKeybindingsServiceOverride from '@codingame/monaco-vscode-keybindings-service-override';
-import './jsfso-client-0.0.1.vsix'
-import { Uri } from 'vscode';
 
 import { CloseAction, ErrorAction, MessageTransports } from 'vscode-languageclient';
 import { BrowserMessageReader, BrowserMessageWriter } from 'vscode-languageserver-protocol/browser.js';
 import 'vscode/localExtensionHost';
-
 
 const languageId = 'jsfso';
 
@@ -28,19 +27,18 @@ export const setupClient = async () => {
 
   })
 
-  updateUserConfiguration(`{
-      "editor.fontSize": 10,
-      [languageId]: {
-        "editor.fontSize": 40,
-      }
-    }`)
-
   const editorOptions = {
-    model: editor.createModel(['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'), languageId, Uri.parse('/workspace/example.statemachine')),
+    model: editor.createModel(['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'), languageId),
     automaticLayout: true
   };
   createConfiguredEditor(document.getElementById('container')!, editorOptions);
 
+  updateUserConfiguration(`{
+    "editor.fontSize": 10,
+    [languageId]: {
+      "editor.fontSize": 40,
+    }
+  }`)
 
   function createLanguageClient(transports: MessageTransports): MonacoLanguageClient {
     return new MonacoLanguageClient({
@@ -63,10 +61,12 @@ export const setupClient = async () => {
     });
   }
 
-  const langiumWorkerUrl = new URL('./dist/server.js', window.location.href).href;
-  const worker = new Worker(langiumWorkerUrl, {
+  const jsfsoWorkerUrl = new URL('./dist/server.js', window.location.href).href;
+  console.log("jsfsoWorkerUrl: " + jsfsoWorkerUrl);
+
+  const worker = new Worker(jsfsoWorkerUrl, {
     type: 'module',
-    name: 'Statemachine LS'
+    name: 'jsfso LS'
   });
   const reader = new BrowserMessageReader(worker);
   const writer = new BrowserMessageWriter(worker);
