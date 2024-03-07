@@ -61,7 +61,7 @@ export const setupClient = async () => {
     });
   }
 
-  const jsfsoWorkerUrl = new URL('./dist/server.js', window.location.href).href;
+  const jsfsoWorkerUrl = new URL('server', window.location.href).href;
   console.log("jsfsoWorkerUrl: " + jsfsoWorkerUrl);
 
   const worker = new Worker(jsfsoWorkerUrl, {
