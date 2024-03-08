@@ -21,6 +21,7 @@
     "@codingame/monaco-vscode-configuration-service-override": "^3.0.0",
     "@codingame/monaco-vscode-keybindings-service-override": "^3.0.0",
     "@codingame/monaco-vscode-languages-service-override": "^3.0.0",
+    "@codingame/monaco-vscode-files-service-override": "^3.0.0",
     "@rollup/pluginutils": "^5.1.0",
     "monaco-editor": "npm:@codingame/monaco-vscode-editor-api@^3.0.0",
     "vscode": "npm:@codingame/monaco-vscode-api@^3.0.0"
