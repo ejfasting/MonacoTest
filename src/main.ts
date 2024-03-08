@@ -2,7 +2,7 @@ import './style.css';
 import 'vscode/localExtensionHost';
 import './jsfso-client-0.0.1.vsix';
 
-import { editor, languages } from 'monaco-editor';
+import { editor } from 'monaco-editor';
 import { initialize as initializeMonacoService } from 'vscode/services';
 import { createConfiguredEditor } from 'vscode/monaco';
 import { MonacoLanguageClient, /*useOpenEditorStub*/ } from 'monaco-languageclient';
@@ -60,11 +60,6 @@ await initializeMonacoService({
   //...getKeybindingsServiceOverride(),
 });
 
-updateUserConfiguration(`{
-  "editor.fontSize": 14,
-  "workbench.colorTheme": "Default Dark Modern"
-}`);
-
 // add the editor to the page
 const rootElement = document.getElementById('root');
 if (rootElement) {
@@ -74,6 +69,7 @@ if (rootElement) {
   };
   createConfiguredEditor(rootElement, editorOptions);
 }
+
 
 function createLanguageClient(transports: MessageTransports): MonacoLanguageClient {
   return new MonacoLanguageClient({
@@ -96,6 +92,7 @@ function createLanguageClient(transports: MessageTransports): MonacoLanguageClie
   });
 }
 
+//Create languageClient
 const jsfsoWorkerUrl = new URL('assets/jsfso-client-0.0.1.vsix/server-xyNSEqxM.js', window.location.href).href;
 const worker = new Worker(jsfsoWorkerUrl, {
   type: 'module',
