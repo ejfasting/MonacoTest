@@ -11,7 +11,8 @@
   "devDependencies": {
     "@types/vscode": "^1.87.0",
     "typescript": "^5.2.2",
-    "vite": "^5.1.4"
+    "vite": "^5.1.4",
+    "@codingame/esbuild-import-meta-url-plugin": "^1.0.2"
   },
   "dependencies": {
     "@codingame/monaco-vscode-rollup-vsix-plugin": "^3.0.0",
@@ -19,9 +20,9 @@
     "@codingame/monaco-vscode-textmate-service-override": "^3.0.0",
     "@codingame/monaco-vscode-configuration-service-override": "^3.0.0",
     "@codingame/monaco-vscode-keybindings-service-override": "^3.0.0",
+    "@codingame/monaco-vscode-languages-service-override": "^3.0.0",
     "@rollup/pluginutils": "^5.1.0",
     "monaco-editor": "npm:@codingame/monaco-vscode-editor-api@^3.0.0",
-    "vscode": "npm:@codingame/monaco-vscode-api@^3.0.0",
-    "monaco-languageclient": "~8.0.0-next.0"
+    "vscode": "npm:@codingame/monaco-vscode-api@^3.0.0"
   }
 }
